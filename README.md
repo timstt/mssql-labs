@@ -14,11 +14,9 @@ Laboratory works for the **SQL** course (Taras Shevchenko National University of
 | `Personnel` | service members | `ID`, `FullName`, `Position`, …, `CompanyID` → `Companies` |
 | `PersonnelLog` | audit log of personnel changes (filled by triggers) | `LogID`, `Action`, `PersonID`, `OldPosition`, `NewPosition`, `ActionDate` |
 
-```
-MilitaryTypes ─┐
-               ├─< Units ─< Companies ─< Personnel ··· PersonnelLog (triggers)
-Locations ─────┘
-```
+![ER diagram](docs/er-diagram.png)
+
+`PersonnelLog` is not on the diagram on purpose: it has no foreign keys and is filled only by triggers (lab 9).
 
 ## Labs
 
@@ -47,6 +45,8 @@ sqlcmd -S localhost -E -i lab03_insert_units_companies.sql
 You can also open the files in Azure Data Studio or SSMS and run them one by one.
 
 > The passwords in `lab06` are placeholders. Replace them before running.
+
+> Code comments are in Ukrainian.
 
 ## Tech stack
 
