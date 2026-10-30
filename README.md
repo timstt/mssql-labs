@@ -1,53 +1,53 @@
-# SQL — лабораторні роботи 1–9 (MS SQL Server)
+# SQL Labs 1–9 (MS SQL Server)
 
-Лабораторні роботи з дисципліни «SQL» (КНУ ім. Тараса Шевченка, ФІТ, спеціальність 121 «Інженерія програмного забезпечення»).
-**Варіант 3 — інформаційна система військового округу.**
+Laboratory works for the **SQL** course (Taras Shevchenko National University of Kyiv, Faculty of Information Technology, specialty 121 "Software Engineering").
+**Variant 3: Military District Information System.**
 
-## Структура БД `SQLLAB`
+## Database `SQLLAB`
 
-| Таблиця | Призначення | Ключові поля |
+| Table | Purpose | Key columns |
 |---|---|---|
-| `MilitaryTypes` | вид військ | `ID`, `Name` |
-| `Locations` | місця дислокації | `Id`, `Country`, `City`, `Address`, `Area` |
-| `Units` | військові частини | `UnitNumber` → `MilitaryTypes`, `Locations` |
-| `Companies` | роти | `ID`, `CompanyNumber`, `UnitNumber` → `Units` |
-| `Personnel` | особовий склад | `ID`, `FullName`, `Position`, …, `CompanyID` → `Companies` |
-| `PersonnelLog` | журнал змін особового складу (заповнюють тригери) | `LogID`, `Action`, `PersonID`, `OldPosition`, `NewPosition`, `ActionDate` |
+| `MilitaryTypes` | branches of the armed forces | `ID`, `Name` |
+| `Locations` | deployment locations | `Id`, `Country`, `City`, `Address`, `Area` |
+| `Units` | military units | `UnitNumber` → `MilitaryTypes`, `Locations` |
+| `Companies` | companies within units | `ID`, `CompanyNumber`, `UnitNumber` → `Units` |
+| `Personnel` | service members | `ID`, `FullName`, `Position`, …, `CompanyID` → `Companies` |
+| `PersonnelLog` | audit log of personnel changes (filled by triggers) | `LogID`, `Action`, `PersonID`, `OldPosition`, `NewPosition`, `ActionDate` |
 
 ```
 MilitaryTypes ─┐
-               ├─< Units ─< Companies ─< Personnel ··· PersonnelLog (тригери)
+               ├─< Units ─< Companies ─< Personnel ··· PersonnelLog (triggers)
 Locations ─────┘
 ```
 
-## Лабораторні
+## Labs
 
-| № | Тема | Файл |
+| # | Topic | File |
 |---|---|---|
-| 1 | SQL Server і командний рядок (sqlcmd) | [`lab01_sqlcmd.sql`](lab01_sqlcmd.sql) |
-| 2 | Створення БД і таблиць | [`lab02_create_db_tables.sql`](lab02_create_db_tables.sql) |
-| 3 | Azure Data Studio, додавання даних, таблиці частин і рот | [`lab03_insert_units_companies.sql`](lab03_insert_units_companies.sql) |
+| 1 | SQL Server and the command line (sqlcmd) | [`lab01_sqlcmd.sql`](lab01_sqlcmd.sql) |
+| 2 | Creating a database and tables | [`lab02_create_db_tables.sql`](lab02_create_db_tables.sql) |
+| 3 | Azure Data Studio, inserting data, units and companies tables | [`lab03_insert_units_companies.sql`](lab03_insert_units_companies.sql) |
 | 4 | SELECT, ORDER BY, WHERE, UPDATE, DELETE | [`lab04_select_update_delete.sql`](lab04_select_update_delete.sql) |
-| 5 | З'єднання таблиць (CROSS / LEFT / RIGHT JOIN), особовий склад | [`lab05_joins_personnel.sql`](lab05_joins_personnel.sql) |
-| 6 | Облікові записи, користувачі, ролі | [`lab06_logins_users_roles.sql`](lab06_logins_users_roles.sql) |
-| 7 | Групування, агрегатні та вбудовані функції | [`lab07_grouping_functions.sql`](lab07_grouping_functions.sql) |
-| 8 | Подання, функції, збережені процедури | [`lab08_views_functions_procedures.sql`](lab08_views_functions_procedures.sql) |
-| 9 | Тригери, транзакції | [`lab09_triggers_transactions.sql`](lab09_triggers_transactions.sql) |
+| 5 | Joins (CROSS / LEFT / RIGHT JOIN), personnel table | [`lab05_joins_personnel.sql`](lab05_joins_personnel.sql) |
+| 6 | Logins, users, roles and permissions | [`lab06_logins_users_roles.sql`](lab06_logins_users_roles.sql) |
+| 7 | Grouping, aggregate and built-in functions | [`lab07_grouping_functions.sql`](lab07_grouping_functions.sql) |
+| 8 | Views, user-defined functions, stored procedures | [`lab08_views_functions_procedures.sql`](lab08_views_functions_procedures.sql) |
+| 9 | Triggers and transactions | [`lab09_triggers_transactions.sql`](lab09_triggers_transactions.sql) |
 
-## Як запустити
+## How to run
 
-Скрипти виконуються **по черзі на чистому сервері** (02 створює базу, кожен наступний спирається на попередній):
+Run the scripts **in order on a clean server**: lab 02 creates the database, and each next script builds on the previous one.
 
 ```bash
 sqlcmd -S localhost -E -i lab02_create_db_tables.sql
 sqlcmd -S localhost -E -i lab03_insert_units_companies.sql
-# ... і так до lab09
+# ... and so on up to lab09
 ```
 
-Або відкрити файли в Azure Data Studio / SSMS і виконати по порядку.
+You can also open the files in Azure Data Studio or SSMS and run them one by one.
 
-> Паролі в `lab06` шаблонні: заміни їх перед запуском.
+> The passwords in `lab06` are placeholders. Replace them before running.
 
-## Технології
+## Tech stack
 
 MS SQL Server 2022 · T-SQL · SSMS · Azure Data Studio · sqlcmd
