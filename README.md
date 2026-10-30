@@ -3,6 +3,8 @@
 Laboratory works for the **SQL** course (Taras Shevchenko National University of Kyiv, Faculty of Information Technology, specialty 121 "Software Engineering").
 **Variant 3: Military District Information System.**
 
+[!NOTE] All data in this repository is fictional and was created for educational purposes only. Names, unit and company numbers, positions, awards, addresses and areas are made up and do not refer to real people, military units or locations.
+
 ## Database `SQLLAB`
 
 | Table | Purpose | Key columns |
